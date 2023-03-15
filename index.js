@@ -37,29 +37,29 @@ const event = {
     colorId: 1
 }
 
-// calendar.freebusy.query({
-//     resource: {
-//         timeMin: eventStartTime,
-//         timeMax: eventEndTime,
-//         timeZone: 'America/Chicago',
-//         items: [{ id: primary }] //test name
-//     },
-// },
-// (err, res) => {
-//     if (err) return console.error('Free or Busy Query Error', err)
+calendar.freebusy.query({
+    resource: {
+        timeMin: eventStartTime,
+        timeMax: eventEndTime,
+        timeZone: 'America/Chicago',
+        items: [{ id: primary }] //test name
+    },
+},
+(err, res) => {
+    if (err) return console.error('Free or Busy Query Error', err)
 
-//         const eventsArr = res.data.calendar.primary.busy
-//         if (eventsArr.length === 0) {
-//             return calendar.events.insert(
-//                 {calendarId: 'primary', resource: event},
-//                 err => {
-//                     if (err)
-//                     return console.error('Calendar Event Creation Error:', err)
+        const eventsArr = res.data.calendar.primary.busy
+        if (eventsArr.length === 0) {
+            return calendar.events.insert(
+                {calendarId: 'primary', resource: event},
+                err => {
+                    if (err)
+                    return console.error('Calendar Event Creation Error:', err)
 
-//                     return console.log('Calendar Event Created')
-//                 }
-//                 )
-//         }
-//         return console.log(`Sorry I'm Busy`)
-//     }
-// )
+                    return console.log('Calendar Event Created')
+                }
+                )
+        }
+        return console.log(`Sorry I'm Busy`)
+    }
+)
